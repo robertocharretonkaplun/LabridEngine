@@ -171,7 +171,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\main.cpp" />
+    <ClInclude Include="include\BaseApp.h" />
+    <ClInclude Include="include\Prerequisites.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\BaseApp.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
