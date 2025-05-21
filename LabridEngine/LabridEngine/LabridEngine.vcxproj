@@ -172,11 +172,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\BaseApp.h" />
+    <ClInclude Include="include\CShape.h" />
     <ClInclude Include="include\Prerequisites.h" />
+    <ClInclude Include="include\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BaseApp.cpp" />
+    <ClCompile Include="src\CShape.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
