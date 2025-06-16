@@ -1,7 +1,7 @@
 #pragma once
 #include "Prerequisites.h"
 #include "Window.h"
-
+#include "CShape.h"
 class 
 BaseApp {
 public:
@@ -29,7 +29,7 @@ public:
 
 
 private:
-	Window* m_window;
-	//sf::RenderWindow* m_window;
-	sf::CircleShape*  m_circle;
+	EngineUtilities::TSharedPointer<Window> m_windowPtr;
+
+	EngineUtilities::TSharedPointer<CShape>   m_shapePtr;
 };
