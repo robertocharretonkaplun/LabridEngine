@@ -50,16 +50,13 @@ void
 BaseApp::render() {
 	m_windowPtr->clear();
 	if (m_shapePtr) {
-		m_shapePtr->render(m_windowPtr); // Asumiendo que render es un método de sf::Shape
-		// draw toma un sf::Shape&, así que desreferenciamos
-		//m_windowPtr->draw(*m_shapePtr);
+		m_shapePtr->render(m_windowPtr);
 	}
-
 	m_windowPtr->display();
 }
 
 void
 BaseApp::destroy() {
-	m_shapePtr.reset();
+	//m_shapePtr.reset();
 	//m_window->destroy();
 }

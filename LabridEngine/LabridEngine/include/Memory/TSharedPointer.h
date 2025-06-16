@@ -156,6 +156,12 @@ namespace EngineUtilities {
 			return *this;
 		}
 
+		template<typename U>
+		TSharedPointer(const TSharedPointer<U>& other)
+			: ptr(other.ptr), refCount(other.refCount) {
+			if (refCount) ++(*refCount);
+		}
+
 		/**
 		 * @brief Destructor.
 		 *
@@ -204,12 +210,6 @@ namespace EngineUtilities {
 		 */
 		bool isNull() const { return ptr == nullptr; }
 
-		template<typename U>
-		TSharedPointer(const TSharedPointer<U>& other)
-			: ptr(other.ptr), refCount(other.refCount)
-		{
-			if (refCount) ++(*refCount);
-		}
 	public:
 		T* ptr;       ///< Puntero al objeto gestionado.
 		int* refCount; ///< Puntero al recuento de referencias.
