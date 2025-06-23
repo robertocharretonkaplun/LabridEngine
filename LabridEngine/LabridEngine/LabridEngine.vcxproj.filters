@@ -19,6 +19,9 @@
     <Filter Include="ECS">
       <UniqueIdentifier>{dfd35226-0b2d-4334-9423-f58827321601}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ECS">
+      <UniqueIdentifier>{74779d2f-2c48-450c-a5af-8ade5b94bb21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Prerequisites.h">
@@ -51,6 +54,9 @@
     <ClInclude Include="include\ECS\Entity.h">
       <Filter>ECS</Filter>
     </ClInclude>
+    <ClInclude Include="include\ECS\Actor.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -64,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="src\CShape.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ECS\Actor.cpp">
+      <Filter>Source Files\ECS</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

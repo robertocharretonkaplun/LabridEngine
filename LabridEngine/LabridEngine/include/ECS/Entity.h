@@ -18,7 +18,7 @@ public:
 	 * @return true si la inicialización fue exitosa, false en caso contrario.
 	 */
 	virtual void
-	start(float deltaTime) = 0;
+	start() = 0;
 
 	/**
 	 * @brief Método virtual puro para actualizar el componente.
@@ -59,8 +59,16 @@ public:
 	template<typename T>
 	EngineUtilities::TSharedPointer<T>
 	getComponent() {
+		for (auto& component : components) {
+			EngineUtilities::TSharedPointer<T> specificComponent = component.template dynamic_pointer_cast<T>();
+			if (specificComponent) {
+				return specificComponent;
+			}
+		}
+
 		return EngineUtilities::TSharedPointer<T>();
 	}
+
 protected:
 	bool isActive;
 	uint32_t id;
