@@ -22,6 +22,12 @@
     <Filter Include="Source Files\ECS">
       <UniqueIdentifier>{74779d2f-2c48-450c-a5af-8ade5b94bb21}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{f72d7094-fdce-4b49-a4e3-de58afe4d002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{448b604e-aa96-4abe-b01b-b62410bae2bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Prerequisites.h">
@@ -57,6 +63,12 @@
     <ClInclude Include="include\ECS\Actor.h">
       <Filter>ECS</Filter>
     </ClInclude>
+    <ClInclude Include="include\ECS\Transform.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\CVector2.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -73,6 +85,9 @@
     </ClCompile>
     <ClCompile Include="src\ECS\Actor.cpp">
       <Filter>Source Files\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\CVector2.cpp">
+      <Filter>Source Files\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

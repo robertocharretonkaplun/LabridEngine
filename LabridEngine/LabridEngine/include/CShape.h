@@ -23,10 +23,16 @@ public:
   createShape(ShapeType shapeType);
 
 	void
-	update(float deltaTime); 
+	start() override;
+	
+	void
+	update(float deltaTime) override;
 
 	void
-	render(const EngineUtilities::TSharedPointer<Window>& window);
+	render(const EngineUtilities::TSharedPointer<Window>& window) override;
+
+	void 
+	destroy() override;
 
 	void 
   setPosition(float x, float y);
