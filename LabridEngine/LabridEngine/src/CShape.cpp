@@ -65,8 +65,20 @@ CShape::destroy() {
 }
 
 void CShape::setPosition(float x, float y) {
-  if (m_shapePtr) m_shapePtr->setPosition(x, y);
-  else ERROR("CShape", "setPosition", "Shape no inicializado");
+  if (m_shapePtr) {
+    m_shapePtr->setPosition(x, y);
+  }
+  else {
+    ERROR("CShape", "setPosition", "Shape no inicializado");
+  }
+}
+void CShape::setPosition(const sf::Vector2f& position) {
+  if (m_shapePtr) {
+    m_shapePtr->setPosition(position);
+  }
+  else {
+    ERROR("CShape", "setPosition", "Shape no inicializado");
+  }
 }
 
 void CShape::setFillColor(const sf::Color& color) {

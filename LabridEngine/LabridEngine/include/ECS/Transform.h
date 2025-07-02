@@ -15,17 +15,14 @@ public:
 	~Transform() = default;
 
   void
-	start() override;
-	
-	void
-	update(float deltaTime) override;
+	start() override {}
 
 	/**
    * @brief Actualiza el componente de malla.
    * @param deltaTime El tiempo transcurrido desde la última actualización.
    */
   void 
-  update(float deltaTime) override {}
+  update(float deltaTime) override{}
 
   /**
    * @brief Renderiza el componente de malla.
@@ -35,7 +32,7 @@ public:
   render(const EngineUtilities::TSharedPointer<Window>& window) override {}
 
   void
-  destroy() {};
+  destroy() {}
 
   void
   Seek(const sf::Vector2f& targetPosition,

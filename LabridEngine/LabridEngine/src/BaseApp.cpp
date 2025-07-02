@@ -39,11 +39,30 @@ BaseApp::init() {
 		m_shapePtr->setFillColor(sf::Color::Green);
 		m_shapePtr->setPosition(200.f, 150.f);
 	}
+
+	// Create Circle Actor
+	m_ACirlce = EngineUtilities::MakeShared<Actor>("Circle Actor");
+	if (m_ACirlce) {
+		m_ACirlce->getComponent<CShape>()->createShape(CIRCLE);
+		m_ACirlce->getComponent<CShape>()->setFillColor(sf::Color::Red);
+		m_ACirlce->getComponent<Transform>()->setPosition(sf::Vector2f(100.f, 150.f));
+		//m_ACirlce->setName("Circle Actor");
+	}
+	else {
+		ERROR("BaseApp",
+			"init",
+			"Failed to create Circle Actor, check memory allocation");
+		return false;
+	}
 	return true;
 }
 
 void
 BaseApp::update() {
+	// Update actors
+	if (!m_ACirlce.isNull()) {
+		m_ACirlce->update(0);
+	}
 }
 
 void
@@ -54,6 +73,9 @@ BaseApp::render() {
 	m_windowPtr->clear();
 	if (m_shapePtr) {
 		m_shapePtr->render(m_windowPtr);
+	}
+	if (!m_ACirlce.isNull()) {
+		m_ACirlce->getComponent<CShape>()->render(m_windowPtr);
 	}
 	m_windowPtr->display();
 }
