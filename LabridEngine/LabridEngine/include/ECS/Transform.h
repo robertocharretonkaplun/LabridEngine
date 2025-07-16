@@ -35,7 +35,7 @@ public:
   destroy() {}
 
   void
-  Seek(const sf::Vector2f& targetPosition,
+  seek(const sf::Vector2f& targetPosition,
        float speed,
        float deltaTime,
        float range) {

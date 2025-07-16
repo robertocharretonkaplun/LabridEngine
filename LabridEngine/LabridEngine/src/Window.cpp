@@ -73,6 +73,12 @@ Window::display() {
 }
 
 void 
+Window::update() {
+	// Almacena el deltaTime una sola vez
+	deltaTime = clock.restart();
+}
+
+void 
 Window::destroy() {
 	m_windowPtr.release();
 	//SAFE_PTR_RELEASE(m_window);

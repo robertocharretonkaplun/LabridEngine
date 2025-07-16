@@ -25,9 +25,14 @@ public:
 	display();
 
 	void
+	update();
+
+	void
 	destroy();
 private:
 	EngineUtilities::TUniquePtr<sf::RenderWindow> m_windowPtr;
-	//sf::RenderWindow* m_window;
 	sf::View m_view;
+public:
+	sf::Time deltaTime;
+	sf::Clock clock;
 };

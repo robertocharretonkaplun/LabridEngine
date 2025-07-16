@@ -33,8 +33,6 @@ public:
 private:
 	EngineUtilities::TSharedPointer<Window> m_windowPtr;
 
-	EngineUtilities::TSharedPointer<CShape>   m_shapePtr;
-
 	EngineUtilities::TSharedPointer<Actor> m_ACirlce;
 
 };
