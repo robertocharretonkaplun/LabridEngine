@@ -26,6 +26,9 @@ public:
 	void
 	destroy() override {};
 
+  void 
+	setTexture(const EngineUtilities::TSharedPointer<Texture>& texture);
+
 	/**
    * @brief Obtiene un componente específico del actor.
    * @tparam T Tipo del componente que se va a obtener.

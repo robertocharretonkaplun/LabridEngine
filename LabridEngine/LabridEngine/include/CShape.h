@@ -2,6 +2,7 @@
 #include "Prerequisites.h"
 #include "ECS\Component.h"
 class Window;
+class Texture;
 
 class 
 CShape : public Component {
@@ -48,6 +49,9 @@ public:
   
   void 
   setScale(const sf::Vector2f& scl);
+
+	void 
+	setTexture(const EngineUtilities::TSharedPointer<Texture>& texture);
 
 private:
 	EngineUtilities::TSharedPointer<sf::Shape> m_shapePtr;

@@ -38,6 +38,7 @@ BaseApp::init() {
 		m_ACirlce->getComponent<CShape>()->createShape(CIRCLE);
 		m_ACirlce->getComponent<CShape>()->setFillColor(sf::Color::Red);
 		m_ACirlce->getComponent<Transform>()->setPosition(sf::Vector2f(200.f, 150.f));
+		//m_ACirlce->setTexture()
 		//m_ACirlce->setName("Circle Actor");
 	}
 	else {
