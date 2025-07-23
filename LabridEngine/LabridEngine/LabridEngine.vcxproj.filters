@@ -72,6 +72,9 @@
     <ClInclude Include="include\ECS\Texture.h">
       <Filter>ECS</Filter>
     </ClInclude>
+    <ClInclude Include="include\ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -91,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="src\Utilities\CVector2.cpp">
       <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ResourceManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

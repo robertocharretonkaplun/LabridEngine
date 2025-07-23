@@ -1,4 +1,5 @@
 #include "BaseApp.h"
+#include "ResourceManager.h"
 
 BaseApp::~BaseApp() {
 }
@@ -23,6 +24,9 @@ BaseApp::run() {
 
 bool
 BaseApp::init() {
+	ResourceManager& resourceMan = ResourceManager::getInstance();
+
+
 	m_windowPtr = EngineUtilities::MakeShared<Window>(1920, 1080, "Labrid Engine");
 	if (!m_windowPtr) {
 		ERROR("BaseApp",
@@ -36,9 +40,15 @@ BaseApp::init() {
 	m_ACirlce = EngineUtilities::MakeShared<Actor>("Circle Actor");
 	if (m_ACirlce) {
 		m_ACirlce->getComponent<CShape>()->createShape(CIRCLE);
-		m_ACirlce->getComponent<CShape>()->setFillColor(sf::Color::Red);
+		m_ACirlce->getComponent<CShape>()->setFillColor(sf::Color::White);
 		m_ACirlce->getComponent<Transform>()->setPosition(sf::Vector2f(200.f, 150.f));
-		//m_ACirlce->setTexture()
+		m_ACirlce->getComponent<Transform>()->setScale(sf::Vector2f(2.f, 2.f));
+		
+		// Cargar la textura para el actor 
+		if (!resourceMan.loadTexture("Sprites/Mushroom","png")) {
+			MESSAGE("BaseApp", "Init", "Can't load the texture")
+		}
+		m_ACirlce->setTexture(resourceMan.getTexture("Sprites/Mushroom"));
 		//m_ACirlce->setName("Circle Actor");
 	}
 	else {

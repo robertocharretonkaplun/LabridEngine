@@ -1,8 +1,8 @@
 #pragma once
 #include "Prerequisites.h"
 #include "ECS\Component.h"
+#include "ECS\Texture.h"
 class Window;
-class Texture;
 
 class 
 CShape : public Component {

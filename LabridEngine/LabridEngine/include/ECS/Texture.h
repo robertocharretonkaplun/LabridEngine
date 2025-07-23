@@ -1,5 +1,5 @@
 #pragma once
-#include "../Prerequisites.h"
+#include "Prerequisites.h"
 #include "Component.h"
 
 class 
@@ -8,7 +8,7 @@ public:
 	Texture() = default;
 
 	Texture(const std::string& textureName, const std::string& extension = "png") :
-		m_textureName(textureName), m_extension(extension), Component(TEXTURE) {
+		m_textureName(textureName), m_extension(extension), Component(ComponentType::TEXTURE) {
 		if(!m_texture.loadFromFile(m_textureName + "." + m_extension)) {
 			std::cout << "Error de carga de textura: " << m_textureName << "." << m_extension << std::endl;
 		}
@@ -21,10 +21,10 @@ public:
 	start() override {};
 
 	void
-	update(float deltaTime) override;
+	update(float deltaTime) override {};
 
 	void
-	render(const EngineUtilities::TSharedPointer<Window>& window) override;
+	render(const EngineUtilities::TSharedPointer<Window>& window) override {};
 
 	void
 	destroy() override {};
