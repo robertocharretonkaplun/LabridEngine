@@ -28,6 +28,9 @@ public:
 	update();
 
 	void
+	render();
+
+	void
 	destroy();
 private:
 	EngineUtilities::TUniquePtr<sf::RenderWindow> m_windowPtr;

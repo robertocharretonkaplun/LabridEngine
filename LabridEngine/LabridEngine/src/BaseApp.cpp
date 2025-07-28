@@ -65,6 +65,7 @@ BaseApp::update() {
 	if (!m_windowPtr.isNull()) {
 		m_windowPtr->update();
 	}
+	ImGui::ShowDemoWindow();
 	// Update actors
 	if (!m_ACirlce.isNull()) {
 		m_ACirlce->update(m_windowPtr->deltaTime.asSeconds());
@@ -87,6 +88,7 @@ BaseApp::render() {
 	if (!m_ACirlce.isNull()) {
 		m_ACirlce->getComponent<CShape>()->render(m_windowPtr);
 	}
+	m_windowPtr->render();
 	m_windowPtr->display();
 }
 
