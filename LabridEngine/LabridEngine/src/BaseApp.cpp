@@ -13,7 +13,7 @@ BaseApp::run() {
 	}
 
 	while (m_windowPtr->isOpen()) {
-		m_windowPtr->handleEvents();
+		m_windowPtr->handleEvents(m_engineGUI);
 		update();
 		render();
 	}
@@ -35,6 +35,8 @@ BaseApp::init() {
 		return false;
 	}
 
+	// Initialize ImGui
+	m_engineGUI.init(m_windowPtr);
 
 	// Create Circle Actor
 	m_ACirlce = EngineUtilities::MakeShared<Actor>("Circle Actor");
@@ -65,6 +67,10 @@ BaseApp::update() {
 	if (!m_windowPtr.isNull()) {
 		m_windowPtr->update();
 	}
+
+	// Update ImGui
+	m_engineGUI.update(m_windowPtr, m_windowPtr->deltaTime);
+
 	ImGui::ShowDemoWindow();
 	// Update actors
 	if (!m_ACirlce.isNull()) {
@@ -83,17 +89,27 @@ BaseApp::render() {
 	if (!m_windowPtr) {
 		return;
 	}
+
 	m_windowPtr->clear();
 
 	if (!m_ACirlce.isNull()) {
 		m_ACirlce->getComponent<CShape>()->render(m_windowPtr);
 	}
 	m_windowPtr->render();
+
+	// Render Imgui
+	m_engineGUI.render(m_windowPtr);
+
 	m_windowPtr->display();
 }
 
 void
 BaseApp::destroy() {
+
+	// Destroy ImGui
+	m_engineGUI.destroy();
+	
+
 	//m_shapePtr.reset();
 	//m_window->destroy();
 }

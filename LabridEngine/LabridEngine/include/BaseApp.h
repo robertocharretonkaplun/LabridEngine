@@ -3,6 +3,7 @@
 #include "Window.h"
 #include "CShape.h"
 #include "ECS\Actor.h"
+#include "EngineGUI.h"
 
 class 
 BaseApp {
@@ -34,5 +35,7 @@ private:
 	EngineUtilities::TSharedPointer<Window> m_windowPtr;
 
 	EngineUtilities::TSharedPointer<Actor> m_ACirlce;
+
+	EngineGUI m_engineGUI;
 
 };
