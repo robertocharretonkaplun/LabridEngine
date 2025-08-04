@@ -51,7 +51,9 @@ BaseApp::init() {
 			MESSAGE("BaseApp", "Init", "Can't load the texture")
 		}
 		m_ACirlce->setTexture(resourceMan.getTexture("Sprites/Mushroom"));
-		//m_ACirlce->setName("Circle Actor");
+
+		// Add Actor to the list of actors
+		m_actors.push_back(m_ACirlce);
 	}
 	else {
 		ERROR("BaseApp",
@@ -70,7 +72,8 @@ BaseApp::update() {
 
 	// Update ImGui
 	m_engineGUI.update(m_windowPtr, m_windowPtr->deltaTime);
-
+	m_engineGUI.outliner(m_actors);
+	m_engineGUI.inspector(m_actors);
 	ImGui::ShowDemoWindow();
 	// Update actors
 	if (!m_ACirlce.isNull()) {
@@ -80,7 +83,7 @@ BaseApp::update() {
 		sf::Vector2f targetPos(1200.f, 150.f);
 
 		// Llamar al seek del Transform
-		m_ACirlce->getComponent<Transform>()->seek(targetPos, 200.0f, m_windowPtr->deltaTime.asSeconds(), 10.0f);
+		//m_ACirlce->getComponent<Transform>()->seek(targetPos, 200.0f, m_windowPtr->deltaTime.asSeconds(), 10.0f);
 	}
 }
 

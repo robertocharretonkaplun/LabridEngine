@@ -50,3 +50,10 @@ ShapeType {
   TRIANGLE = 3,
   POLYGON = 4,
 };
+
+enum 
+ConsolErrorType {
+  INFO = 0,
+  WARNING = 1,
+  ERROR = 2
+};

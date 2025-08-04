@@ -32,10 +32,14 @@ public:
 
 
 private:
+	std::vector< EngineUtilities::TSharedPointer<Actor>> m_actors;
+
 	EngineUtilities::TSharedPointer<Window> m_windowPtr;
 
 	EngineUtilities::TSharedPointer<Actor> m_ACirlce;
 
 	EngineGUI m_engineGUI;
+
+
 
 };

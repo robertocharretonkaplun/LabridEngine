@@ -29,6 +29,10 @@ public:
   void 
 	setTexture(const EngineUtilities::TSharedPointer<Texture>& texture);
 
+  std::string getName() {
+    return m_name;
+  }
+
 	/**
    * @brief Obtiene un componente específico del actor.
    * @tparam T Tipo del componente que se va a obtener.
