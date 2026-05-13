@@ -1,10 +1,13 @@
 #include <SFML/Graphics.hpp>
 
 sf::CircleShape shape(50.f);
+
 int main()
 {
 	// create the window
 	sf::RenderWindow window(sf::VideoMode({ 800, 600 }), "My window");
+	// set the shape color to green
+	shape.setFillColor(sf::Color(100, 250, 50));
 
 	// run the program as long as the window is open
 	while (window.isOpen())
@@ -17,8 +20,6 @@ int main()
 				window.close();
 		}
 
-		// set the shape color to green
-		shape.setFillColor(sf::Color(100, 250, 50));
 		// clear the window with black color
 		window.clear(sf::Color::Black);
 
