@@ -4,8 +4,8 @@
 Window* g_window = nullptr;
 sf::CircleShape shape(50.f);
 
-int main()
-{
+int 
+main() {
 	// create the window
 	g_window = new Window(800, 600, "My window");
 	//sf::RenderWindow window(sf::VideoMode({ 800, 600 }), "My window");
@@ -13,14 +13,11 @@ int main()
 	shape.setFillColor(sf::Color(100, 250, 50));
 
 	// run the program as long as the window is open
-	while (g_window->isOpen())
-	{
+	while (g_window->isOpen()) {
 		// check all the window's events that were triggered since the last iteration of the loop
-		while (const std::optional event = g_window->m_window->pollEvent())
-		{
+		while (const std::optional event = g_window->m_window->pollEvent())	{
 			// "close requested" event: we close the window
-			if (event->is<sf::Event::Closed>())
-			{
+			if (event->is<sf::Event::Closed>()) {
 				g_window->close();
 				g_window->destroy();
 			}
