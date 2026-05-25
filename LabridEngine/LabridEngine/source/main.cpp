@@ -1,16 +1,21 @@
 #include "Prerequisites.h"
 #include "Core/Window.h"
+#include "Core/CShape.h"
 
 Window* g_window = nullptr;
-sf::CircleShape shape(50.f);
+CShape Circle(ShapeType::CIRCLE);
+CShape line(ShapeType::LINE);
+
+void destroy() {
+	SAFE_PTR_RELEASE(g_window);
+}
 
 int 
 main() {
 	// create the window
 	g_window = new Window(800, 600, "My window");
-	//sf::RenderWindow window(sf::VideoMode({ 800, 600 }), "My window");
 	// set the shape color to green
-	shape.setFillColor(sf::Color(100, 250, 50));
+	Circle.getShape()->setFillColor(sf::Color(100, 250, 50));
 
 	// run the program as long as the window is open
 	while (g_window->isOpen()) {
@@ -19,7 +24,6 @@ main() {
 			// "close requested" event: we close the window
 			if (event->is<sf::Event::Closed>()) {
 				g_window->close();
-				g_window->destroy();
 			}
 		}
 
@@ -27,9 +31,12 @@ main() {
 		g_window->clear(sf::Color::Black);
 
 		// draw everything here...
-		g_window->draw(shape);
+		Circle.draw(*g_window);
+		line.draw(*g_window);
 
 		// end the current frame
 		g_window->display();
 	}
+	destroy();
+	return 0;
 }
