@@ -8,6 +8,7 @@ namespace ECS {
 	class 
   Registry {
   public:
+    
     EntityID CreateEntity() {
       EntityIndex idx;
       if (!m_freeList.empty()) {
