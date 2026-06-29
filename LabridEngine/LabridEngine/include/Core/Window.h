@@ -27,6 +27,17 @@ public:
 	void
 	close();
 
+	// Reajusta la sf::View al nuevo tamaño de la ventana.
+	// Llamar al recibir un sf::Event::Resized.
+	void
+	handleResize(const sf::Vector2u& size);
+
+	// Aplica la vista de cámara: centra en 'center', aplica 'zoom'
+	// sobre el tamaño base y rota la vista 'rotationDeg' grados.
+	// La llama el CameraSystem.
+	void
+	applyCameraView(const sf::Vector2f& center, float zoom, float rotationDeg);
+
 	void
 	update();
 
@@ -40,6 +51,7 @@ public:
 	std::unique_ptr<sf::RenderWindow> m_window = nullptr;
 private:
 	sf::View m_view;
+	sf::Vector2f m_baseViewSize{};   // tamaño de la vista sin zoom (lo fija el resize)
 	sf::Time deltaTime;
 	sf::Clock clock;
 };

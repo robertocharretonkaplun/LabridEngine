@@ -4,7 +4,9 @@
 #include "ECS/Registry.h"
 #include "ECS/Components/Transform.h"
 #include "ECS/Components/Render.h"
+#include "ECS/Components/Camera.h"
 #include "ECS/Systems/RenderSystem.h"
+#include "ECS/Systems/CameraSystem.h"
 #include "ECS/Systems/UISystem.h"
 
 Window g_window(Window(800, 600, "Labrid Engine"));
@@ -23,6 +25,7 @@ int main()
   }
 
 	// Registrar sistemas en el ECS.
+  registry.AddSystem<ECS::CameraSystem>(g_window);
   registry.AddSystem<ECS::RenderSystem>(g_window);
 	registry.AddSystem<ECS::UISystem>();
 
@@ -36,6 +39,13 @@ int main()
   registry.AddComponent<ECS::Transform>(tri, sf::Vector2f{ 200.f, 200.f }, 45.f);
   registry.AddComponent<ECS::Render>(tri, ECS::Render::Make(TRIANGLE, sf::Color::Cyan));
 
+  ECS::EntityID cam = registry.CreateEntity();
+  registry.AddComponent<ECS::Transform>(cam, sf::Vector2f{ 0.f, 0.f });
+  auto& camComp = registry.AddComponent<ECS::Camera>(cam);
+  camComp.followTarget = circle;     // la cámara sigue al player
+  camComp.followSpeed = 5.f;        // sube para que se pegue más rápido
+  camComp.zoom = 1;
+
   while (g_window.isOpen()) {
     while (const std::optional event =
       g_window.m_window->pollEvent()) {
@@ -44,6 +54,10 @@ int main()
 
       if (event->is<sf::Event::Closed>()) {
         g_window.close();
+      }
+			// Resize event: update the view to the new size of the window.
+      else if(const auto* resized = event->getIf<sf::Event::Resized>()) {
+        g_window.handleResize(resized->size);
       }
     }
 

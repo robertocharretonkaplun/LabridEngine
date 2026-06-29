@@ -4,6 +4,22 @@
 #include "ECS/Registry.h"
 #include "ECS/Components/Transform.h"
 #include "ECS/Components/Render.h"
+#include "ECS/Components/Camera.h"
+
+// ============================================================
+//  ECS :: Systems/UISystem.h
+//
+//  UISystem — LÓGICA de los paneles de ImGui.
+//
+//  IMPORTANTE: este sistema contiene SOLO los ImGui::Begin/End
+//  y los widgets. El ciclo de frame de ImGui
+//  (ImGui_ImplXXX_NewFrame + ImGui::NewFrame() al inicio, y
+//   ImGui::Render() + RenderDrawData al final) NO va aquí:
+//  vive en el game loop / en tu Window.
+//
+//  Por eso este sistema debe registrarse EL ÚLTIMO
+//  (después del RenderSystem), para que la UI quede encima.
+// ============================================================
 
 namespace ECS {
 
@@ -82,6 +98,23 @@ namespace ECS {
                   static_cast<std::uint8_t>(color[2] * 255.f),
                   static_cast<std::uint8_t>(color[3] * 255.f));
               }
+            }
+          }
+
+          if (auto* cam = registry.TryGetComponent<ECS::Camera>(selectedEntity)) {
+            if (ImGui::CollapsingHeader("Camera", ImGuiTreeNodeFlags_DefaultOpen)) {
+              // La posición y la rotación de la cámara se editan arriba,
+              // en el bloque Transform. Aquí solo lo propio de la cámara.
+              ImGui::Checkbox("Active", &cam->active);
+              ImGui::DragFloat("Zoom", &cam->zoom, 0.01f, 0.05f, 10.f);
+              ImGui::DragFloat("Follow Speed", &cam->followSpeed, 0.1f, 0.f, 50.f);
+
+              // Objetivo a seguir (solo lectura aquí; muestra el ID).
+              if (cam->followTarget == ECS::NULL_ENTITY)
+                ImGui::Text("Follow Target: (ninguno)");
+              else
+                ImGui::Text("Follow Target: %llu",
+                  static_cast<unsigned long long>(cam->followTarget));
             }
           }
         }
