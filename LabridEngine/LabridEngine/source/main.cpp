@@ -33,7 +33,7 @@ int main()
 
   ECS::EntityID circle = registry.CreateEntity();
   registry.AddComponent<ECS::Transform>(circle, sf::Vector2f{ 400.f, 300.f });
-  registry.AddComponent<ECS::Render>(circle, ECS::Render::Make(CIRCLE, sf::Color(100, 250, 50)));
+  registry.AddComponent<ECS::Render>(circle, ECS::Render::Make(CIRCLE, sf::Color(100, 250, 50), "Textures/ColorChecker.png"));
 
   ECS::EntityID tri = registry.CreateEntity();
   registry.AddComponent<ECS::Transform>(tri, sf::Vector2f{ 200.f, 200.f }, 45.f);
