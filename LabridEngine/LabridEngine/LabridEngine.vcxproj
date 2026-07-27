@@ -25,6 +25,7 @@
     <ClCompile Include="..\ThirdParties\imgui-docking\imgui_tables.cpp" />
     <ClCompile Include="..\ThirdParties\imgui-docking\imgui_widgets.cpp" />
     <ClCompile Include="..\ThirdParties\imgui-sfml-3.0\imgui-SFML.cpp" />
+    <ClCompile Include="include\ECS\Systems\UISystem.cpp" />
     <ClCompile Include="source\Core\CShape.cpp" />
     <ClCompile Include="source\Core\Window.cpp" />
     <ClCompile Include="source\main.cpp" />

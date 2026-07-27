@@ -60,6 +60,9 @@
     <ClCompile Include="..\ThirdParties\imgui-docking\imgui_widgets.cpp">
       <Filter>Source Files\Imgui</Filter>
     </ClCompile>
+    <ClCompile Include="include\ECS\Systems\UISystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Prerequisites.h">

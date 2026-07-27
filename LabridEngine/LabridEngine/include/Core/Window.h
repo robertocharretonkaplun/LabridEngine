@@ -38,6 +38,10 @@ public:
 	void
 	applyCameraView(const sf::Vector2f& center, float zoom, float rotationDeg);
 
+	/* Establece el nivel de MSAA para la ventana. */
+	void
+	setMSAALevel(unsigned int level);
+
 	void
 	update();
 
@@ -54,4 +58,5 @@ private:
 	sf::Vector2f m_baseViewSize{};   // tamaño de la vista sin zoom (lo fija el resize)
 	sf::Time deltaTime;
 	sf::Clock clock;
+	std::string m_title;
 };

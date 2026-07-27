@@ -27,6 +27,10 @@ namespace ECS {
 	public:
 		UISystem() = default;
 
+    explicit UISystem(Window& window) noexcept
+      : m_window(window) {
+    }
+
     void OnStart(Registry& /*registry*/) override {
       // Habilitar docking.
       ImGuiIO& io = ImGui::GetIO();
@@ -47,6 +51,7 @@ namespace ECS {
 
 			DrawOutliner(registry);
 			DrawDetails(registry);
+      DrawMSAASettings();
 		}
 
 		void 
@@ -276,9 +281,87 @@ namespace ECS {
       ImGui::PopID();
     }
 
+    void 
+    DrawMSAASettings() {
+      ImGui::Begin("MSAA Settings");
+
+      const unsigned int currentLevel =
+        m_window.m_window->getSettings().antiAliasingLevel;
+
+      ImGui::Text("Current MSAA Level: %ux", currentLevel);
+      ImGui::Separator();
+
+      static constexpr std::array<unsigned int, 4> msaaLevels{
+          0, 2, 4, 8
+      };
+
+      static constexpr const char* msaaLabels[]{
+          "Disabled",
+          "2x MSAA",
+          "4x MSAA",
+          "8x MSAA"
+      };
+
+      // Se conserva entre frames.
+      static int selectedIndex = [&]()
+        {
+          const auto iterator = std::find(
+            msaaLevels.begin(),
+            msaaLevels.end(),
+            currentLevel
+          );
+
+          if (iterator == msaaLevels.end())
+            return 0;
+
+          return static_cast<int>(
+            std::distance(msaaLevels.begin(), iterator)
+            );
+        }();
+
+      ImGui::SetNextItemWidth(150.0f);
+
+      ImGui::Combo(
+        "MSAA Level",
+        &selectedIndex,
+        msaaLabels,
+        static_cast<int>(std::size(msaaLabels))
+      );
+
+      const unsigned int selectedLevel =
+        msaaLevels[static_cast<std::size_t>(selectedIndex)];
+
+      const bool hasChanges = selectedLevel != currentLevel;
+
+      if (!hasChanges)
+        ImGui::BeginDisabled();
+
+      if (ImGui::Button("Apply"))
+      {
+        m_window.setMSAALevel(selectedLevel);
+      }
+
+      if (!hasChanges)
+        ImGui::EndDisabled();
+
+      ImGui::SameLine();
+
+      if (hasChanges)
+        ImGui::Text("Pending: %ux", selectedLevel);
+      else
+        ImGui::TextDisabled("No pending changes");
+
+      ImGui::Separator();
+      ImGui::TextWrapped(
+        "Changing MSAA recreates the rendering window."
+      );
+
+      ImGui::End();
+    }
 	private:
 		// Entidad seleccionada en el outliner (NULL_ENTITY = ninguna).
 		ECS::EntityID selectedEntity = ECS::NULL_ENTITY;
+    Window& m_window;
 	};
 
 };

@@ -27,7 +27,7 @@ int main()
 	// Registrar sistemas en el ECS.
   registry.AddSystem<ECS::CameraSystem>(g_window);
   registry.AddSystem<ECS::RenderSystem>(g_window);
-	registry.AddSystem<ECS::UISystem>();
+	registry.AddSystem<ECS::UISystem>(g_window);
 
   sf::Clock deltaClock;
 

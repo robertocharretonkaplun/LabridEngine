@@ -1,22 +1,43 @@
 #include "Core/Window.h"
 
-Window::Window(int width, int height, const std::string& title) {
-	
-	m_window = std::make_unique<sf::RenderWindow>(sf::VideoMode({ static_cast<unsigned int>(width),
-																																static_cast<unsigned int>(height) }), 
-																																title,
-																																sf::Style::Default);
-	if (m_window) {
-		m_window->setFramerateLimit(60);
-		// Vista inicial: origen en el centro y tamaño base = tamaño ventana.
-		// (también inicializa m_baseViewSize para el zoom de la cámara)
+Window::Window(int width, int height, const std::string& title)
+{
+	// Configuración del contexto OpenGL
+	sf::ContextSettings settings;
+	settings.depthBits = 24;
+	settings.stencilBits = 8;
+	settings.antiAliasingLevel = 4; // Levels: 0 (no AA), 2, 4, 8, 16
+	m_title = title;
+
+	m_window = std::make_unique<sf::RenderWindow>(
+															sf::VideoMode({
+																	static_cast<unsigned int>(width),
+																	static_cast<unsigned int>(height)
+																}),
+															title,
+															sf::Style::Default,
+															sf::State::Windowed,
+															settings
+														);
+
+	if (m_window->isOpen())
+	{
+		// Usa VSync o límite de FPS según tu necesidad.
+		m_window->setVerticalSyncEnabled(true);
+		// m_window->setFramerateLimit(60);
+
 		handleResize(m_window->getSize());
-		MESSAGE("Window", "Window", "Window created successfully");
 
+		const sf::ContextSettings actualSettings =
+			m_window->getSettings();
+
+		MESSAGE("Window", "Window", "MSAA disponible: "	+ std::to_string(actualSettings.antiAliasingLevel) + "x");
+
+		MESSAGE("Window", "Window",	"Window created successfully");
 	}
-	else {
-		ERROR("Window", "Window", "Failed to create window");
-
+	else
+	{
+		ERROR("Window", "Window",	"Failed to create window");
 	}
 }
 
@@ -84,7 +105,7 @@ Window::handleResize(const sf::Vector2u& size) {
 	// Centro de la vista en (0,0) → el origen del mundo queda en
 	// el CENTRO de la pantalla. Área visible: (-w/2,-h/2)..(w/2,h/2).
 	const sf::Vector2f fSize(static_cast<float>(size.x),
-													 static_cast<float>(size.y));
+		static_cast<float>(size.y));
 	m_baseViewSize = fSize;            // tamaño base (sin zoom) para la cámara
 	m_view.setSize(fSize);
 	m_view.setCenter({ 0.f, 0.f });
@@ -104,6 +125,40 @@ Window::applyCameraView(const sf::Vector2f& center, float zoom, float rotationDe
 	m_view.setCenter(center);
 	m_view.setRotation(sf::degrees(rotationDeg));   // rota toda la vista
 	m_window->setView(m_view);
+}
+
+void 
+Window::setMSAALevel(unsigned int level) {
+	if (!m_window) {
+		return;
+	}
+
+	const sf::Vector2u currentSize = m_window->getSize();
+	const sf::Vector2i currentPosition = m_window->getPosition();
+	const sf::View currentView = m_window->getView();
+
+	sf::ContextSettings settings;
+	settings.depthBits = 24;
+	settings.stencilBits = 8;
+	settings.antiAliasingLevel = level;
+
+	m_window->create(
+		sf::VideoMode(currentSize),
+		m_title,
+		sf::Style::Default,
+		sf::State::Windowed,
+		settings
+	);
+
+	m_window->setPosition(currentPosition);
+	m_window->setView(currentView);
+
+	m_window->setVerticalSyncEnabled(true);
+
+	const sf::ContextSettings actualSettings =
+		m_window->getSettings();
+
+	MESSAGE("Window", "Window", "MSAA disponible: " + std::to_string(actualSettings.antiAliasingLevel) + "x");
 }
 
 void
